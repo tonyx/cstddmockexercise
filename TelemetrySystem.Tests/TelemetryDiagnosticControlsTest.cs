@@ -7,24 +7,8 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
     [TestFixture]
     public class TelemetryDiagnosticControlsTest
     {
-        [Test]
-        public void CheckTransmission_should_send_a_diagnostic_message_and_receive_a_status_message_response()
-        {
-        	Assert.IsTrue(true);
-        }
-        
-//        [Test]
-//        public void Check_That_sensor_is_called_by_the_alarm()
-//        {
-//        	MockAlarm alarm = new MockAlarm();
-//        	alarm.Check();
-//
-//        	
-//        	alarm.Verify();
-//        	
-//        }
-        
-        
+
+               
        [Test]
 		public void For_A_Value_of_pressure_18_TheAlarmShould_be_off()
         {

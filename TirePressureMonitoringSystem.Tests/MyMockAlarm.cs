@@ -40,13 +40,11 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem.Tests
 			MockSensor mocksensor = (MockSensor)_sensor;
 
 		 	if (mocksensor.CountCall!=_expectedCalls)
-		 		throw new ArgumentOutOfRangeException("AlarmOn calls count "+mocksensor.CountCall);
+		 		throw new ArgumentOutOfRangeException("count call expected "+_expectedCalls+"but actual was "+mocksensor.CountCall);
 		 	
 		 	if (this._expectedAlarmOns!=_alarmCount)
-		 		throw new ArgumentOutOfRangeException("AlarmOn calls count "+mocksensor.CountCall);
-
-		}
-		
+		 		throw new ArgumentOutOfRangeException("AlarmOn calls count expected "+this._expectedAlarmOns+" but was "+_alarmCount);
+		}		
 
 	}
 }

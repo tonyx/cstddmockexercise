@@ -18,8 +18,10 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
         {
             // placeholder implementation that simulate a real sensor in a real tire
 //            Random basicRandomNumbersGenerator = new Random(42);
-   		  Random basicRandomNumbersGenerator = new Random(System.DateTime.Now.Millisecond);
-            pressureTelemetryValue = 6 * basicRandomNumbersGenerator.NextDouble() * basicRandomNumbersGenerator.NextDouble();
+
+		  // added a random seed to the random generator
+    		  Random basicRandomNumbersGenerator = new Random(System.DateTime.Now.Millisecond);
+             pressureTelemetryValue = 6 * basicRandomNumbersGenerator.NextDouble() * basicRandomNumbersGenerator.NextDouble();
         }
     }
 }
