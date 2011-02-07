@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Rhino.Mocks;
 using TDDMicroExercises.TirePressureMonitoringSystem;
 using TDDMicroExercises.TirePressureMonitoringSystem.Tests;
 
@@ -35,6 +36,7 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         	
         }
 		
+		
 		[Test]
 		public void When_the_Pressure_alarm_is_violated_two_times_the_alarm_count_shoud_count_two()
         {
@@ -49,7 +51,36 @@ namespace TDDMicroExercises.TelemetrySystem.Tests
         	alarm.ExpectedAlarmOns=2;
         	alarm.Verify();
         	
-        }
+        } 
+		 
+		[Test]
+		public void when_the_pressure_in_under_16_the_alarm_is_on_with_rhino_mock()
+		{
+			MockRepository mocks = new MockRepository();
+			ISensor sensor = mocks.StrictMock<ISensor>();
+			Expect.Call(sensor.PopNextPressurePsiValue()).Return(16.00);
+			IAlarm alarm = new Alarm(sensor);
+			mocks.ReplayAll();			
+			alarm.Check();			
+			Assert.IsTrue(alarm.AlarmOn);
+			sensor.VerifyAllExpectations();
+		}
+
+		
+		[Test]
+		public void when_the_pressure_in_over_19_the_alarm_is_on_with_rhino_mock()
+		{
+			MockRepository mocks = new MockRepository();
+			ISensor sensor = mocks.StrictMock<ISensor>();
+			Expect.Call(sensor.PopNextPressurePsiValue()).Return(18.00);
+			IAlarm alarm = new Alarm(sensor);
+			mocks.ReplayAll();			
+			alarm.Check();			
+			Assert.IsFalse(alarm.AlarmOn);
+			sensor.VerifyAllExpectations();
+		}
+			
+
 		
     }
 }
