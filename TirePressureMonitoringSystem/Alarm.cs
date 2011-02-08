@@ -1,3 +1,4 @@
+using System;
 using TDDMicroExercises.TirePressureMonitoringSystem.Tests;
 
 namespace TDDMicroExercises.TirePressureMonitoringSystem
@@ -24,11 +25,14 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
         public void Check()
         {
             double psiPressureValue = _sensor.PopNextPressurePsiValue();
-
+            
             if (psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue)
             {
                 _alarmOn = true;
                 _alarmCount += 1;
+            } else
+            {
+            	_alarmOn = false;
             }
         }
 
