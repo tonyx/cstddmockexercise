@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Web;
 
@@ -5,30 +6,33 @@ namespace TDDMicroExercises.UnicodeFileToHtmTextConverter
 {
     public class UnicodeFileToHtmTextConverter
     {
-        private string _fullFilenameWithPath;
+        		
+       	private TextReader _textReader;
+        
+       	public UnicodeFileToHtmTextConverter(TextReader reader)
+       	{
+       	 	_textReader = reader;
+       	}
 
-
+       	 
         public UnicodeFileToHtmTextConverter(string fullFilenameWithPath)
         {
-            _fullFilenameWithPath = fullFilenameWithPath;
+        	_textReader = File.OpenText(fullFilenameWithPath);
         }
 
         public string ConvertToHtml()
-        {
-            using (TextReader unicodeFileStream = File.OpenText(_fullFilenameWithPath))
+        {                        	 
+            string html = string.Empty;
+
+            string line = _textReader.ReadLine();
+            while (line != null)
             {
-                string html = string.Empty;
-
-                string line = unicodeFileStream.ReadLine();
-                while (line != null)
-                {
-                    html += HttpUtility.HtmlEncode(line);
-                    html += "</b>";
-                    line = unicodeFileStream.ReadLine();
-                }
-
-                return html;
+                html += HttpUtility.HtmlEncode(line);
+                html += "</b>";
+                line = _textReader.ReadLine();
             }
+
+            return html;            
         }
     }
 }
