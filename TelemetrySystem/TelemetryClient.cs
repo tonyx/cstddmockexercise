@@ -2,7 +2,7 @@ using System;
 
 namespace TDDMicroExercises.TelemetrySystem
 {
-	public class TelemetryClient
+	public class TelemetryClient : ITelemetryClient
 	{
 		public const string DiagnosticMessage = "AT#UD";
 

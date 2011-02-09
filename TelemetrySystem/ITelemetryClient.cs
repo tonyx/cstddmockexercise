@@ -15,6 +15,11 @@ namespace TDDMicroExercises.TelemetrySystem
 	/// </summary>
 	public interface ITelemetryClient
 	{
-		
+		void Connect(String connectionString);
+		bool OnlineStatus {get;}
+		void Disconnect();
+		void Send(String message);
+		string Receive();
+				
 	}
 }
