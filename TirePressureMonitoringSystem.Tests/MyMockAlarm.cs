@@ -14,7 +14,7 @@ using System;
 namespace TDDMicroExercises.TirePressureMonitoringSystem.Tests
 {
 	/// <summary>
-	/// Description of MyMockAlarm.
+	/// deprecato (ora uso rhino)
 	/// </summary>
 	public class MyMockAlarm : Alarm
 	{

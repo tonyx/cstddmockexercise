@@ -14,7 +14,9 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
 	/// Description of IAlarm.
 	/// </summary>
 	public interface IAlarm
-	{
-		
-	}
+    {
+        void Check();
+
+        bool AlarmOn { get; }
+    }
 }

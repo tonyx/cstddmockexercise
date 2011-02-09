@@ -25,7 +25,7 @@ namespace TDDMicroExercises.UnicodeFileToHtmTextConverter.Tests
 		{
 			MockRepository mocks = new MockRepository();
 			TextReader reader = mocks.StrictMock<TextReader>();
-						
+			
 			Expect.Call(reader.ReadLine()).Return("hello привет");
 			Expect.Call(reader.ReadLine()).Return(null);
 			

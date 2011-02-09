@@ -12,6 +12,7 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem.Tests
 {
 	/// <summary>
 	/// Description of MockSensor.
+	/// deprecto (ora uso rhino)
 	/// </summary>
 	public class MockSensor : ISensor
 	{

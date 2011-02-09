@@ -17,7 +17,6 @@ namespace TDDMicroExercises.TurnTicketDispenser.Tests
 	public class TurnTicketDispenserTest
 	{
 
-
 		[Test]
 		public void TestTicketDispenser()
 		{
@@ -25,13 +24,11 @@ namespace TDDMicroExercises.TurnTicketDispenser.Tests
 		
 			ITurnNumberSequence sequence = mocks.StrictMock<ITurnNumberSequence>();
 			Expect.Call(sequence.GetNextNumber()).Return(0);
-			Expect.Call(sequence.GetNextNumber()).Return(1);
-			
-			TurnNumberSequence.Instance=sequence;
+			Expect.Call(sequence.GetNextNumber()).Return(1);			
 			
 			mocks.ReplayAll();
 									
-			TicketDispenser ticketDispenser = new TicketDispenser(TurnNumberSequence.Instance);
+			TicketDispenser ticketDispenser = new TicketDispenser(sequence);
 			
 			TurnTicket first = new TurnTicket(0);
 			TurnTicket second = new TurnTicket(1);
@@ -39,8 +36,7 @@ namespace TDDMicroExercises.TurnTicketDispenser.Tests
 			Assert.AreEqual(first,ticketDispenser.GetTurnTicket());
 			Assert.AreEqual(second,ticketDispenser.GetTurnTicket());
 			
-			mocks.VerifyAll();
-						
+			mocks.VerifyAll();						
 		}
 		
 		
@@ -51,13 +47,11 @@ namespace TDDMicroExercises.TurnTicketDispenser.Tests
 		
 			ITurnNumberSequence sequence = mocks.StrictMock<ITurnNumberSequence>();
 			Expect.Call(sequence.GetNextNumber()).Return(999999);
-			Expect.Call(sequence.GetNextNumber()).Return(1000000);
-			
-			TurnNumberSequence.Instance=sequence;
+			Expect.Call(sequence.GetNextNumber()).Return(1000000);			
 			
 			mocks.ReplayAll();
 									
-			TicketDispenser ticketDispenser = new TicketDispenser(TurnNumberSequence.Instance);
+			TicketDispenser ticketDispenser = new TicketDispenser(sequence);
 			
 			TurnTicket first = new TurnTicket(999999);
 			TurnTicket second = new TurnTicket(1000000);
@@ -65,9 +59,60 @@ namespace TDDMicroExercises.TurnTicketDispenser.Tests
 			Assert.AreEqual(first,ticketDispenser.GetTurnTicket());
 			Assert.AreEqual(second,ticketDispenser.GetTurnTicket());
 			
+			mocks.VerifyAll();						
+		}
+		
+		
+		[Test]
+		public void TestLegacyTickeTispensers()
+		{
+			MockRepository mocks = new MockRepository();
+		
+			ITurnNumberSequence sequence = mocks.StrictMock<ITurnNumberSequence>();
+			Expect.Call(sequence.GetNextNumber()).Return(0);
+			Expect.Call(sequence.GetNextNumber()).Return(1);			
+			TurnNumberSequence.Instance=sequence;
+			
+			mocks.ReplayAll();
+									
+			LegacyTicketDispenser ticketDispenser = new LegacyTicketDispenser();
+			
+			TurnTicket first = new TurnTicket(0);
+			TurnTicket second = new TurnTicket(1);
+			
+			Assert.AreEqual(first,ticketDispenser.GetTurnTicket());
+			Assert.AreEqual(second,ticketDispenser.GetTurnTicket());
+			
 			mocks.VerifyAll();
 						
-		}
+		}		
+		
+		
+		[Test]
+		public void ShuldBeableToUseConsistentlyLegacyAndNonLegacyDispenserUsingSameSequence()
+		{
+			MockRepository mocks = new MockRepository();
+		
+			ITurnNumberSequence sequence = mocks.StrictMock<ITurnNumberSequence>();
+			Expect.Call(sequence.GetNextNumber()).Return(0);
+			Expect.Call(sequence.GetNextNumber()).Return(1);			
+			TurnNumberSequence.Instance=sequence;
+			
+			mocks.ReplayAll();
+									
+			LegacyTicketDispenser legacyticketDispenser = new LegacyTicketDispenser();
+			TicketDispenser ticketDispenser = new TicketDispenser(TurnNumberSequence.Instance);
+			
+			TurnTicket first = new TurnTicket(0);
+			TurnTicket second = new TurnTicket(1);
+			
+			Assert.AreEqual(first,ticketDispenser.GetTurnTicket());
+			Assert.AreEqual(second,legacyticketDispenser.GetTurnTicket());
+			
+			mocks.VerifyAll();
+						
+		}	
+		
 		
 		
 	}

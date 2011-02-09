@@ -4,35 +4,35 @@ using System.Web;
 
 namespace TDDMicroExercises.UnicodeFileToHtmTextConverter
 {
-    public class UnicodeFileToHtmTextConverter
-    {
-        		
-       	private TextReader _textReader;
-        
-       	public UnicodeFileToHtmTextConverter(TextReader reader)
-       	{
-       	 	_textReader = reader;
-       	}
+	public class UnicodeFileToHtmTextConverter
+	{
+		
+		private TextReader _textReader;
+		
+		public UnicodeFileToHtmTextConverter(TextReader reader)
+		{
+			_textReader = reader;
+		}
 
-       	 
-        public UnicodeFileToHtmTextConverter(string fullFilenameWithPath)
-        {
-        	_textReader = File.OpenText(fullFilenameWithPath);
-        }
+		
+		public UnicodeFileToHtmTextConverter(string fullFilenameWithPath)
+		{
+			_textReader = File.OpenText(fullFilenameWithPath);
+		}
 
-        public string ConvertToHtml()
-        {                        	 
-            string html = string.Empty;
+		public string ConvertToHtml()
+		{
+			string html = string.Empty;
 
-            string line = _textReader.ReadLine();
-            while (line != null)
-            {
-                html += HttpUtility.HtmlEncode(line);
-                html += "</b>";
-                line = _textReader.ReadLine();
-            }
+			string line = _textReader.ReadLine();
+			while (line != null)
+			{
+				html += HttpUtility.HtmlEncode(line);
+				html += "</b>";
+				line = _textReader.ReadLine();
+			}
 
-            return html;            
-        }
-    }
+			return html;
+		}
+	}
 }
