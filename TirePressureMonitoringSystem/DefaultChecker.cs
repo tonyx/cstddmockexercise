@@ -13,10 +13,15 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
 	/// <summary>
 	/// Description of DefaultChecker.
 	/// </summary>
-	public class DefaultChecker
+	public class DefaultChecker : IChecker
 	{
-		public DefaultChecker()
+        private const double LowPressureTreshold = 17;
+        private const double HighPressureTreshold = 21;
+		
+		public bool Check(double psiPressureValue)
 		{
+			return (psiPressureValue < LowPressureTreshold || HighPressureTreshold < psiPressureValue);
 		}
+			
 	}
 }

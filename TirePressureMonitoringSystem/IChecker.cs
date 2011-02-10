@@ -15,6 +15,6 @@ namespace TDDMicroExercises.TirePressureMonitoringSystem
 	/// </summary>
 	public interface IChecker
 	{
-		
+		bool Check(double psiPressureValue);
 	}
 }
